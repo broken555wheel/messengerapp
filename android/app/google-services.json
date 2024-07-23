@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "413017025916",
+    "project_id": "chatmessengerapp-4272f",
+    "storage_bucket": "chatmessengerapp-4272f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413017025916:android:33cba185b62f2bfcaa88f9",
+        "android_client_info": {
+          "package_name": "com.example.messengerapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRXH7sMbeugmfl9tNDWcZKYg1X-kJrfDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413017025916:android:66efd7ddf2e44b70aa88f9",
+        "android_client_info": {
+          "package_name": "com.mwalimulab.chatmessenger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRXH7sMbeugmfl9tNDWcZKYg1X-kJrfDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413017025916:android:f391b919a263e105aa88f9",
+        "android_client_info": {
+          "package_name": "com.mwalimulab.chatmessengerapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRXH7sMbeugmfl9tNDWcZKYg1X-kJrfDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
