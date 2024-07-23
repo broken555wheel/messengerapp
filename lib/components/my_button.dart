@@ -18,6 +18,7 @@ class MyButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.circular(9),
+            shape: BoxShape.rectangle,
           ),
           child:Text(
             text, 
