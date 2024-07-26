@@ -44,8 +44,8 @@ class _HomePageState extends State<HomePage> {
         }
 
         return ListView(
-          children: snapshot.data!.docs
-              .map<Widget>((doc) => _buildUserListItem(doc))
+          children: snapshot.data!.docs  // provides a list of documents from the Firestore collection.
+              .map<Widget>((doc) => _buildUserListItem(doc))  // maps each document to a widget
               .toList(),
         );
       },
