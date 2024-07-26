@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:messengerapp/services/auth/auth_service.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,7 @@ class _RegisterPage extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-
+  var passwordNotVisible = true;
   // sign up user
   void signUp() async {
     if (passwordController.text != confirmPasswordController.text) {
@@ -30,18 +31,19 @@ class _RegisterPage extends State<RegisterPage> {
     }
     final authService = Provider.of<AuthService>(context, listen: false);
 
-  try {
-    await authService.signUpWithEmailandPassword(emailController.text, passwordController.text);
-  } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content:Text(e.toString()), ),
-    );
-  }
+    try {
+      await authService.signUpWithEmailandPassword(
+          emailController.text, passwordController.text);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+        ),
+      );
+    }
   }
 
   // get auth service
-  
 
   @override
   Widget build(BuildContext context) {
@@ -77,14 +79,36 @@ class _RegisterPage extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 50),
                     MyTextField(
-                        controller: passwordController,
-                        hintText: 'Password',
-                        obscureText: true),
+                      controller: passwordController,
+                      hintText: 'Password',
+                      obscureText: passwordNotVisible,
+                      suffixIcon: IconButton(
+                        icon: passwordNotVisible
+                            ? const Icon(CupertinoIcons.eye)
+                            : const Icon(CupertinoIcons.eye_slash),
+                        onPressed: () {
+                          setState(() {
+                            passwordNotVisible = !passwordNotVisible;
+                          });
+                        },
+                      ),
+                    ),
                     const SizedBox(height: 50),
                     MyTextField(
-                        controller: confirmPasswordController,
-                        hintText: 'Confirm Password',
-                        obscureText: true),
+                      controller: passwordController,
+                      hintText: 'Confirm Password',
+                      obscureText: passwordNotVisible,
+                      suffixIcon: IconButton(
+                        icon: passwordNotVisible
+                            ? const Icon(CupertinoIcons.eye)
+                            : const Icon(CupertinoIcons.eye_slash),
+                        onPressed: () {
+                          setState(() {
+                            passwordNotVisible = !passwordNotVisible;
+                          });
+                        },
+                      ),
+                    ),
                     const SizedBox(height: 50),
                     MyButton(onTap: signUp, text: 'Sign up'),
                     const SizedBox(height: 50),

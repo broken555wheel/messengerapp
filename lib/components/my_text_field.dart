@@ -4,11 +4,13 @@ class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
+  final Widget? suffixIcon;
   const MyTextField({
     super.key,
     required this.controller,
     required this.hintText,
     required this.obscureText,
+    this.suffixIcon,
   });
 
   @override
@@ -18,20 +20,20 @@ class MyTextField extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Colors.grey.shade200,
-          ), 
-        ),
-        focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.white),
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
         ),
-        fillColor: Colors.grey[100],
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+        ),
+        fillColor: Theme.of(context).colorScheme.tertiary,
         filled: true,
         hintText: hintText,
-        hintStyle: const TextStyle(
-          color: Colors.grey,
+        hintStyle: TextStyle(
+          color: Theme.of(context).colorScheme.primary,
         ),
+        suffixIcon: suffixIcon,
       ),
     );
   }
