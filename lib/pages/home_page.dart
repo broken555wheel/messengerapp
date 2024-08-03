@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:messengerapp/pages/chat_page.dart';
 import 'package:messengerapp/services/auth/auth_service.dart';
-import 'package:provider/provider.dart';
+import 'package:messengerapp/components/my_drawer.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,9 +26,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('HomePage'), actions: [
-        IconButton(onPressed: signOut, icon: const Icon(Icons.logout))
-      ]),
+      appBar: AppBar(
+        title: Center(
+          child: Text(
+            'Home',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.tertiary,
+            ),
+          ),
+        ),
+        actions: [
+          IconButton(
+              onPressed: signOut,
+              icon: Icon(
+                Icons.logout,
+                color: Theme.of(context).colorScheme.tertiary,
+              ))
+        ],
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      drawer: const MyDrawer(),
       body: _buildUserList(),
     );
   }
@@ -44,8 +64,10 @@ class _HomePageState extends State<HomePage> {
         }
 
         return ListView(
-          children: snapshot.data!.docs  // provides a list of documents from the Firestore collection.
-              .map<Widget>((doc) => _buildUserListItem(doc))  // maps each document to a widget
+          children: snapshot.data!
+              .docs // provides a list of documents from the Firestore collection.
+              .map<Widget>((doc) =>
+                  _buildUserListItem(doc)) // maps each document to a widget
               .toList(),
         );
       },
@@ -58,7 +80,7 @@ class _HomePageState extends State<HomePage> {
     // display all users except the current user
     if (_auth.currentUser!.email != data['email']) {
       return ListTile(
-        title: Text (data['email']),
+        title: Text(data['email']),
         onTap: () {
           // pass the clicked user's UID to the chat page
           Navigator.push(

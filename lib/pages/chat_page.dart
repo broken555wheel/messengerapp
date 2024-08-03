@@ -74,8 +74,9 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildMessageItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
 
+    bool isCurrentUser = data['senderId'] == _firebaseAuth.currentUser!.uid;
     // align messages
-    var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
+    var alignment = (isCurrentUser)
         ? Alignment.centerRight
         : Alignment.centerLeft;
 
@@ -88,7 +89,7 @@ class _ChatPageState extends State<ChatPage> {
           children: [
             Text(data['senderEmail']),
             const SizedBox(height: 5),
-            ChatBubble(message: data['message']),
+            ChatBubble(message: data['message'], isCurrentUser: isCurrentUser ,),
           ],
         ),
       ),
@@ -106,11 +107,18 @@ class _ChatPageState extends State<ChatPage> {
               hintText: 'Enter a message',
               obscureText: false),
         ),
-        IconButton(
-          onPressed: sendMessage,
-          icon: const Icon(
-            Icons.arrow_upward,
-            size: 40,
+        Container(
+          decoration: const BoxDecoration(
+            color: Colors.green,
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            onPressed: sendMessage,
+            icon: const Icon(
+              Icons.arrow_upward,
+              size: 40,
+              color: Colors.white,
+            ),
           ),
         ),
       ]),
