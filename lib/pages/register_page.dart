@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:messengerapp/components/my_alert_dialogue.dart';
 import 'package:messengerapp/services/auth/auth_service.dart';
 import 'package:provider/provider.dart';
 
@@ -20,12 +21,11 @@ class _RegisterPage extends State<RegisterPage> {
   final confirmPasswordController = TextEditingController();
   var passwordNotVisible = true;
   // sign up user
-  void signUp() async {
+  void signUp(BuildContext context) async {
     if (passwordController.text != confirmPasswordController.text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Passwords do not match'),
-        ),
+      showDialog(
+        context: context,
+        builder: (context) => const MyAlertDialogue(title: 'Error', content: 'Passwords do not match', buttonText: 'ok')
       );
       return;
     }
@@ -95,7 +95,7 @@ class _RegisterPage extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 50),
                     MyTextField(
-                      controller: passwordController,
+                      controller: confirmPasswordController,
                       hintText: 'Confirm Password',
                       obscureText: passwordNotVisible,
                       suffixIcon: IconButton(
@@ -110,7 +110,7 @@ class _RegisterPage extends State<RegisterPage> {
                       ),
                     ),
                     const SizedBox(height: 50),
-                    MyButton(onTap: signUp, text: 'Sign up'),
+                    MyButton(onTap: () => signUp(context), text: 'Sign up'),
                     const SizedBox(height: 50),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

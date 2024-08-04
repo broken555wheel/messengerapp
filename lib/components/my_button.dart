@@ -19,21 +19,22 @@ class MyButton extends StatelessWidget {
             maxWidth: 250,
           ),
           padding: const EdgeInsets.all(25),
+          margin: const EdgeInsets.symmetric(horizontal: 25),
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.tertiary,
             borderRadius: BorderRadius.circular(10),
           ),
           child:Center(
             widthFactor: 1,
             child: Text(
               text, 
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
                 
               )
-            ),
+            )
           ),
         ),
       );

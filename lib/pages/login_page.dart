@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:messengerapp/components/my_alert_dialogue.dart';
 
 import 'package:messengerapp/components/my_button.dart';
 import 'package:messengerapp/components/my_text_field.dart';
 import 'package:messengerapp/services/auth/auth_service.dart';
-
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -20,19 +19,16 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void signIn() async {
-    final authService = Provider.of<AuthService>(context, listen: false);
+  void signIn(BuildContext context) async {
+    final authService = AuthService();
 
     try {
       await authService.signInWithEmailandPassword(
           emailController.text, passwordController.text);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            e.toString(),
-          ),
-        ),
+      showDialog(
+        context: context,
+        builder: (context) =>  MyAlertDialogue(title: 'Error', content: e.toString(), buttonText: 'OK')
       );
     }
   }
@@ -87,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 50),
-                  MyButton(onTap: signIn, text: 'Sign in'),
+                  MyButton(onTap: () => signIn(context), text: 'Sign in'),
                   const SizedBox(height: 50),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +93,9 @@ class _LoginPageState extends State<LoginPage> {
                       GestureDetector(
                         onTap: widget.onTap,
                         child: const Text('Register now',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            )),
                       ),
                     ],
                   )
